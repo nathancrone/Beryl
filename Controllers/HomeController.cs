@@ -28,14 +28,18 @@ namespace Beryl.Controllers
 
         public IActionResult Redirect(int? id)
         {
+            // if no id is specified
             if (id == null)
                 return Content("no redirect id specified.");
 
+            // get the redirect row by the id
             var r = _inMemoryContext.Redirects.FirstOrDefault(x => x.RedirectId == id);
 
+            // if no redirect row is found
             if (r == null)
                 return Content("no matching redirect found.");
 
+            //redirect
             return Redirect(r.Url);
         }
 

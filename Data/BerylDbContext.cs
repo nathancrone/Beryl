@@ -14,10 +14,7 @@ namespace Beryl.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("dbo");
-
             modelBuilder.ApplyConfiguration(new RedirectConfig());
-
             base.OnModelCreating(modelBuilder);
         }
 

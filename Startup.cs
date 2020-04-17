@@ -66,7 +66,8 @@ namespace Beryl
                 );
                 endpoints.MapControllerRoute(
                     name: "admin",
-                    pattern: "admin/{controller=Admin}/{action=Index}/{id?}"
+                    pattern: "admin/{action=Index}/{id?}",
+                    defaults: new { controller = "Admin" }
                 );
             });
         }
