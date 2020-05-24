@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Beryl.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Beryl
 {
@@ -45,6 +46,16 @@ namespace Beryl
             {
                 options.Conventions.AuthorizeFolder("/Redirects", "RequireAdministratorRole");
                 options.Conventions.AddPageRoute("/ViewRedirect", "/v/{id?}");
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Identity/Account/Login";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
             });
         }
 
