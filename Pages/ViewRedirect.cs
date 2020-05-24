@@ -27,11 +27,19 @@ namespace Beryl.Pages
         [BindProperty]
         public Redirect RedirectLink { get; set; }
 
+        public int? RedirectTimeSeconds { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
+            }
+
+            int seconds = 0;
+            if (!string.IsNullOrEmpty(Request.Query["t"]) && int.TryParse(Request.Query["t"], out seconds))
+            {
+                RedirectTimeSeconds = seconds;
             }
 
             if (_context.Redirects.Count() == 0)

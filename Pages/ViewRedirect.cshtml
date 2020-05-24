@@ -1,7 +1,16 @@
 ﻿@page
-@model ViewRedirectModel
+@model Beryl.Pages.ViewRedirectModel
+
 @{
     ViewData["Title"] = "Link";
+}
+
+@section Scripts {
+    @if (Model.RedirectTimeSeconds != null)
+    {
+        var c = $"{Model.RedirectTimeSeconds};URL='{Model.RedirectLink.Url}'";
+        <meta http-equiv="refresh" content="@c" />
+    }
 }
 
 <pre><code>
