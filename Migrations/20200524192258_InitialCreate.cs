@@ -12,7 +12,8 @@ namespace Beryl.Migrations
                 {
                     RedirectId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Url = table.Column<string>(nullable: true)
+                    Url = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -21,13 +22,13 @@ namespace Beryl.Migrations
 
             migrationBuilder.InsertData(
                 table: "Redirects",
-                columns: new[] { "RedirectId", "Url" },
-                values: new object[] { 1, "http://www.google.com" });
+                columns: new[] { "RedirectId", "Description", "Url" },
+                values: new object[] { 1, null, "http://www.google.com" });
 
             migrationBuilder.InsertData(
                 table: "Redirects",
-                columns: new[] { "RedirectId", "Url" },
-                values: new object[] { 2, "http://www.amazon.com" });
+                columns: new[] { "RedirectId", "Description", "Url" },
+                values: new object[] { 2, null, "http://www.amazon.com" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

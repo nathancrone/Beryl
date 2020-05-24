@@ -67,7 +67,7 @@ namespace Beryl.Services
             // copy all redirect rows from sqlite to in-memory
             foreach (var r in _sqliteContext.Redirects)
             {
-                _inMemoryContext.Redirects.Add(new Redirect() { RedirectId = r.RedirectId, Url = r.Url });
+                _inMemoryContext.Redirects.Add(new Redirect() { RedirectId = r.RedirectId, Url = r.Url, Description = r.Description });
             }
             _inMemoryContext.SaveChanges();
         }

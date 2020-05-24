@@ -33,8 +33,19 @@ namespace Beryl
             services.AddDbContext<AuthDbContext>(options => options.UseInMemoryDatabase("AuthDb"));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AuthDbContext>();
             services.AddScoped<ISeedService, SeedService>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrator"));
+            });
+
             services.AddControllers();
-            services.AddRazorPages();
+
+            services.AddRazorPages().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Redirects", "RequireAdministratorRole");
+                options.Conventions.AddPageRoute("/ViewRedirect", "/v/{id?}");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
