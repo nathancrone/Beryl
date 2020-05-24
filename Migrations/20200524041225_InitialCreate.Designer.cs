@@ -8,15 +8,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Beryl.Migrations
 {
     [DbContext(typeof(BerylSqliteContext))]
-    [Migration("20200416224038_InitialCreate")]
+    [Migration("20200524041225_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("dbo")
-                .HasAnnotation("ProductVersion", "3.1.3");
+                .HasAnnotation("ProductVersion", "3.1.4");
 
             modelBuilder.Entity("Beryl.Models.Redirect", b =>
                 {

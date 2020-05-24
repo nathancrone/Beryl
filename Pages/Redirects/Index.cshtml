@@ -1,0 +1,42 @@
+@page
+@model Beryl.Pages.Redirects.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RedirectLink[0].RedirectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RedirectLink[0].Url)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RedirectLink) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RedirectId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RedirectId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RedirectId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.RedirectId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

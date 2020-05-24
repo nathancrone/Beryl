@@ -6,12 +6,8 @@ namespace Beryl.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "dbo");
-
             migrationBuilder.CreateTable(
                 name: "Redirects",
-                schema: "dbo",
                 columns: table => new
                 {
                     RedirectId = table.Column<int>(nullable: false)
@@ -24,13 +20,11 @@ namespace Beryl.Migrations
                 });
 
             migrationBuilder.InsertData(
-                schema: "dbo",
                 table: "Redirects",
                 columns: new[] { "RedirectId", "Url" },
                 values: new object[] { 1, "http://www.google.com" });
 
             migrationBuilder.InsertData(
-                schema: "dbo",
                 table: "Redirects",
                 columns: new[] { "RedirectId", "Url" },
                 values: new object[] { 2, "http://www.amazon.com" });
@@ -39,8 +33,7 @@ namespace Beryl.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Redirects",
-                schema: "dbo");
+                name: "Redirects");
         }
     }
 }

@@ -15,19 +15,7 @@ namespace Beryl
     {
         public static void Main(string[] args)
         {
-            var host = CreateHostBuilder(args).Build();
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-
-                var inMemoryDbContext = services.GetRequiredService<BerylInMemoryContext>();
-                var sqliteDbContext = services.GetRequiredService<BerylSqliteContext>();
-
-                DataGenerator.Initialize(services);
-            }
-
-            host.Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

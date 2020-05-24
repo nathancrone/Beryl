@@ -7,18 +7,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Beryl.Models;
 using Beryl.Data;
+using Beryl.Services;
 
 namespace Beryl.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private BerylInMemoryContext _inMemoryContext;
+        private readonly BerylInMemoryContext _inMemoryContext;
+        private readonly ISeedService _seedService;
 
-        public HomeController(ILogger<HomeController> logger, BerylInMemoryContext inMemoryContext)
+        public HomeController(ILogger<HomeController> logger, BerylInMemoryContext inMemoryContext, ISeedService seedService)
         {
             _logger = logger;
             _inMemoryContext = inMemoryContext;
+            _seedService = seedService;
         }
 
         public IActionResult Index()
@@ -31,6 +34,12 @@ namespace Beryl.Controllers
             // if no id is specified
             if (id == null)
                 return Content("no redirect id specified.");
+
+
+            if (_inMemoryContext.Redirects.Count() == 0)
+            {
+                _seedService.SeedRedirects();
+            }
 
             // get the redirect row by the id
             var r = _inMemoryContext.Redirects.FirstOrDefault(x => x.RedirectId == id);
